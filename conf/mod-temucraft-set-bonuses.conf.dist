@@ -1,0 +1,13 @@
+[worldserver]
+
+########################################
+# mod-temucraft-set-bonuses
+########################################
+#
+#    Temucraft.SetBonuses.Enable
+#        Description: Extra bonuses for item sets and single items, from mod_temucraft_set_bonus (world database):
+#                     creature-type damage, faster in some zones, procs, low-health saves, stacking buffs and
+#                     transformations. .reload config reloads the table too.
+#        Default:     1
+
+Temucraft.SetBonuses.Enable = 1
