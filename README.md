@@ -64,3 +64,5 @@ Mending passive, its heal, the city copy, Summon Violet Elemental) with their `s
 (creature 610050, a guardian copy of the Syth Arcane Elemental at the summoner's level) and the three Barrens items
 (610070-610072) with their drops. `--client` adds the spells and items to the client's Spell.dbc and Item.dbc.
 Zone speed pieces of the same kind add up.
+
+Part of the Temucraft modules for AzerothCore 3.3.5a.
