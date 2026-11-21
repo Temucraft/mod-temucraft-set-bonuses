@@ -72,6 +72,7 @@ namespace
     };
 
     bool enabled = true;
+    int32 zoneMultiplier = 2;
     std::vector<Bonus> bonuses;
     std::unordered_map<uint32, std::vector<Bonus const*>> bySet;    // itemset -> bonuses
     std::unordered_map<uint32, std::vector<Bonus const*>> byItem;   // item -> bonuses
@@ -202,13 +203,13 @@ namespace
         ObjectGuid const targetGuid = target->GetGUID();
         uint32 const spell = b.spell;
         int32 bp = b.bpPerLevel > 0.0f ? std::max(1, int32(b.bpPerLevel * p->GetLevel())) : b.bpPerLevel < 0.0f ? int32(-b.bpPerLevel) : 0;
-        // doubled in the bonus' zones
+        // doubled in the bonus' zones (Temucraft.SetBonuses.ZoneMultiplier)
         if (!b.zones.empty() && b.zones.count(p->GetZoneId()))
         {
             if (!bp)
                 if (SpellInfo const* info = sSpellMgr->GetSpellInfo(spell))
                     bp = info->Effects[EFFECT_0].CalcValue(p);
-            bp *= 2;
+            bp *= zoneMultiplier;
         }
         int32 const duration = b.duration;
         p->m_Events.AddEventAtOffset([p, targetGuid, spell, bp, duration]()
@@ -433,6 +434,7 @@ public:
     void OnAfterConfigLoad(bool reload) override
     {
         enabled = sConfigMgr->GetOption<bool>("Temucraft.SetBonuses.Enable", true);
+        zoneMultiplier = sConfigMgr->GetOption<int32>("Temucraft.SetBonuses.ZoneMultiplier", 2);
         if (reload)
             Load();
     }

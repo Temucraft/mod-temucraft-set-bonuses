@@ -11,3 +11,10 @@
 #        Default:     1
 
 Temucraft.SetBonuses.Enable = 1
+
+#
+#    Temucraft.SetBonuses.ZoneMultiplier
+#        Description: How much stronger a bonus with zones is inside those zones (2 = doubled).
+#        Default:     2
+
+Temucraft.SetBonuses.ZoneMultiplier = 2

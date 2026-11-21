@@ -1,6 +1,8 @@
 -- mod-temucraft-set-bonuses: extra bonuses for item sets (itemset = ItemSet.dbc id) or single items (item, itemset 0).
 -- kind: 1 creature damage, 2 zone speed, 3 on hit, 4 when hit, 5 low health, 6 stacks, 7 transform, 8 aura.
 -- See the module README for what value1/value2/stacks/zones mean for each kind.
+SET @SetSpell := 96394;
+SET @SetItem := 610070;
 CREATE TABLE IF NOT EXISTS `mod_temucraft_set_bonus` (
     `id`           INT UNSIGNED NOT NULL,
     `itemset`      INT UNSIGNED NOT NULL DEFAULT 0,
@@ -60,18 +62,18 @@ INSERT INTO `mod_temucraft_set_bonus` (`id`, `itemset`, `pieces`, `kind`, `race`
 (101, 182, 5, 10, 0,  0, 139,   10, 3000,  0,     0.5,  0,     0,  0, '', 'Vestments of the Devout: heals may also heal over time'),
 -- Magister's Regalia (Violet Sorcerer's Vestments): mana regeneration while casting, an arcane elemental
 (110, 181, 4, 3,  0,  0, 38346, 10, 15000, 8000,  0,    2,     0,  0, '', 'Magister''s Regalia: damaging spells may keep 15% of mana regeneration while casting for 8 sec'),
-(111, 181, 5, 3,  0,  0, 96397, 3,  60000, 0,     0,    2,     0,  0, '', 'Magister''s Regalia: damaging spells may summon a Violet Elemental for 15 sec (1 min cooldown)'),
+(111, 181, 5, 3,  0,  0, @SetSpell+3, 3,  60000, 0,     0,    2,     0,  0, '', 'Magister''s Regalia: damaging spells may summon a Violet Elemental for 15 sec (1 min cooldown)'),
 -- Shadowcraft Armor (Defias Enforcer's Garb): swords, critical strikes
 (120, 184, 4, 8,  0,  0, 1201338, 0, 0,    0,     0,    0,     1,  0, '', 'Shadowcraft Armor: +1 Swords skill'),
 (121, 184, 5, 3,  0,  0, 34837, 5,  0,     20000, -2,   1,     0,  0, '8,15,11,3521', 'Shadowcraft Armor: melee hits may give +2% critical strike chance for 20 sec (doubled in swamps)'),
 -- Imperial Plate (Krol'dok Battlegear): blocking may heal (a second chance in cities)
-(130, 321, 4, 8,  0,  0, 96394, 0,  0,     0,     0,    0,     0,  0, '', 'Imperial Plate: blocking may heal you for 14 to 23'),
-(131, 321, 4, 8,  0,  0, 96396, 0,  0,     0,     0,    0,     0,  0, '1519,1537,1657,3557,1637,1638,1497,3487,3703,4395', 'Imperial Plate: in cities blocking heals twice as often'),
+(130, 321, 4, 8,  0,  0, @SetSpell, 0,  0,     0,     0,    0,     0,  0, '', 'Imperial Plate: blocking may heal you for 14 to 23'),
+(131, 321, 4, 8,  0,  0, @SetSpell+2, 0,  0,     0,     0,    0,     0,  0, '1519,1537,1657,3557,1637,1638,1497,3487,3703,4395', 'Imperial Plate: in cities blocking heals twice as often'),
 -- Chain of the Scarlet Crusade (Scarlet Guardian)
 (140, 163, 6, 5,  0,  0, 23991, 0,  240000, 10000, -480, 0,    20, 0, '', 'Chain of the Scarlet Crusade (Scarlet Guardian): dropping below 20% health absorbs 480 damage for 10 sec (4 min cooldown)');
 
 -- Blessing of the Barrens: single items from the Barrens rares (tools/build_set_extras.py), 2.5% run speed each
 INSERT INTO `mod_temucraft_set_bonus` (`id`, `item`, `kind`, `value1`, `value2`, `zones`, `comment`) VALUES
-(150, 610070, 2, 0, 2.5, '17,406', 'Pridelord''s Mantle: 2.5% run speed in the Barrens and Stonetalon Mountains'),
-(151, 610071, 2, 0, 2.5, '17,406', 'Swiftmane Striders: 2.5% run speed in the Barrens and Stonetalon Mountains'),
-(152, 610072, 2, 0, 2.5, '17,406', 'Takk''s Leaping Cape: 2.5% run speed in the Barrens and Stonetalon Mountains');
+(150, @SetItem, 2, 0, 2.5, '17,406', 'Pridelord''s Mantle: 2.5% run speed in the Barrens and Stonetalon Mountains'),
+(151, @SetItem+1, 2, 0, 2.5, '17,406', 'Swiftmane Striders: 2.5% run speed in the Barrens and Stonetalon Mountains'),
+(152, @SetItem+2, 2, 0, 2.5, '17,406', 'Takk''s Leaping Cape: 2.5% run speed in the Barrens and Stonetalon Mountains');
