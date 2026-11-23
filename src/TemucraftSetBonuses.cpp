@@ -24,6 +24,7 @@
 // level of the wearer (negative: that value, flat); duration (ms) overrides how long it lasts; cooldown (ms) is per
 // player and bonus. For the spell-casting kinds (3, 4, 5, 9, 10) zones are where the effect is doubled.
 
+#include "TemucraftLocked.h"
 #include "Chat.h"
 #include "Config.h"
 #include "DatabaseEnv.h"
@@ -89,7 +90,7 @@ namespace
         bool setting = false;                         // changing the display ourselves
         uint32 timer = 0;
     };
-    std::unordered_map<uint32, PlayerState> states;
+    Temucraft::LockedMap<uint32, PlayerState> states;
 
     PlayerState& State(Player* p) { return states[p->GetGUID().GetCounter()]; }
     uint32 Now() { return uint32(GameTime::GetGameTimeMS().count()); }
